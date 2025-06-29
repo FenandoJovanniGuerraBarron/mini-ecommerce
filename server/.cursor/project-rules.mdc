@@ -1,0 +1,159 @@
+---
+description: 
+globs: *.js
+alwaysApply: false
+---
+# 📋 PROJECT RULES - Mini E-commerce API
+
+## 🏗️ **Arquitectura del Proyecto**
+
+### **Stack Tecnológico**
+- **Backend**: Node.js + Express.js
+- **Base de Datos**: MySQL con Sequelize ORM
+- **Autenticación**: JWT (jsonwebtoken)
+- **Encriptación**: bcrypt para contraseñas
+- **Gestión de Dependencias**: npm/pnpm
+
+### **Estructura de Directorios**
+```
+server/
+├── database/
+│   ├── config/          # Configuración de Sequelize
+│   ├── migrations/      # Migraciones de base de datos
+│   ├── models/          # Modelos de Sequelize
+│   └── seeders/         # Datos de prueba
+├── controllers/         # Controladores de la API
+├── services/           # Lógica de negocio
+├── routes/             # Definición de rutas
+├── middleware/         # Middlewares personalizados
+├── utils/              # Utilidades y helpers
+├── scripts/            # Scripts personalizados
+├── app.js              # Punto de entrada de la aplicación
+├── config.js           # Configuración general
+└── .sequelizerc        # Configuración de Sequelize CLI
+```
+
+## 📝 **Convenciones de Código**
+
+### **Nomenclatura**
+- **Archivos**: kebab-case (ej: `product-routes.js`)
+- **Directorios**: kebab-case (ej: `database/models`)
+- **Clases**: PascalCase (ej: `User`, `Product`)
+- **Variables/Funciones**: camelCase (ej: `getAllProducts`, `userId`)
+- **Constantes**: UPPERCASE (ej: `JWT_SECRET`)
+- **Variables booleanas**: verbos (ej: `isAuthenticated`, `hasError`)
+
+### **Patrones de Diseño**
+- **Separación de Responsabilidades**: Controllers → Services → Models
+- **Un export por archivo**
+- **Sin líneas en blanco dentro de funciones**
+- **Cada función comienza con un verbo**
+
+## 🔐 **Autenticación y Seguridad**
+
+### **JWT Implementation**
+- **Secret**: Configurado en variables de entorno (`JWT_SECRET`)
+- **Middleware**: `auth.middleware.js` para proteger rutas
+- **Servicio**: `auth.service.js` para lógica de autenticación
+
+### **Encriptación**
+- **Contraseñas**: bcrypt con salt rounds
+- **Variables sensibles**: En archivo `.env`
+
+## 🗄️ **Base de Datos**
+
+### **Modelos Implementados**
+- **User**: Usuarios del sistema
+- **Product**: Productos del catálogo
+- **Order**: Órdenes de compra
+- **OrderItem**: Items de cada orden
+
+### **Relaciones**
+- User ↔ Order (1:N)
+- Order ↔ OrderItem (1:N)
+- Product ↔ OrderItem (1:N)
+
+### **Migraciones**
+- Creación de tablas con timestamps
+- Claves foráneas definidas en migración separada
+- Índices para optimización
+
+## 🛣️ **API Endpoints**
+
+### **Estructura de Respuesta**
+```javascript
+{
+  success: boolean,
+  data?: any,
+  message: string,
+  error?: string
+}
+```
+
+### **Rutas Implementadas**
+- **Productos**: `GET /api/products`, `GET /api/products/:id`
+- **Usuarios**: `POST /api/users` (registro)
+- **Autenticación**: `POST /api/auth/login`
+- **Carrito**: `POST /api/cart/add`, `GET /api/cart` (pendiente)
+
+### **Códigos de Estado HTTP**
+- `200`: Éxito
+- `201`: Creado
+- `400`: Error de validación
+- `401`: No autorizado
+- `404`: No encontrado
+- `500`: Error interno del servidor
+
+## 🔧 **Configuración y Scripts**
+
+### **Scripts NPM**
+- `npm run dev`: Desarrollo con nodemon
+- `npm start`: Producción
+- `npm run migration:run`: Ejecutar migraciones
+- `npm run seed:run`: Ejecutar seeders
+
+### **Variables de Entorno Requeridas**
+```env
+DB_USER=usuario
+DB_PASS=contraseña
+DB_NAME=nombre_db
+DB_HOST=localhost
+JWT_SECRET=secret_jwt
+```
+
+## 🚨 **Reglas Importantes**
+
+### **Desarrollo**
+1. **NO modificar archivos sin consultar al usuario**
+2. **Seguir las convenciones establecidas**
+3. **Implementar manejo de errores en todos los endpoints**
+4. **Validar datos de entrada**
+5. **Usar async/await para operaciones asíncronas**
+
+### **Comunicación**
+- **Respuestas en español** para el usuario
+- **Código y documentación en inglés**
+- **Mensajes de commit en inglés** y descriptivos
+
+### **Prueba Técnica - Requisitos Pendientes**
+- ✅ Productos (GET)
+- ✅ Usuarios (POST /register)
+- ✅ Autenticación (POST /login)
+- ❌ Carrito (POST /cart/add, GET /cart)
+- ❌ Checkout (POST /checkout)
+
+## 📊 **Estado Actual del Proyecto**
+- **Base de datos**: Configurada y migrada
+- **Modelos**: Implementados con relaciones
+- **Autenticación**: JWT implementado
+- **Productos**: Endpoints básicos funcionando
+- **Usuarios**: Registro implementado
+- **Carrito**: Servicio creado, pendiente controlador y rutas
+- **Checkout**: Pendiente implementación
+
+## 🔄 **Flujo de Trabajo**
+1. **Análisis**: Revisar requisitos y estado actual
+2. **Planificación**: Definir pasos a seguir
+3. **Implementación**: Crear archivos paso a paso
+4. **Validación**: Verificar que todo funcione correctamente
+5. **Documentación**: Actualizar estado del proyecto 
