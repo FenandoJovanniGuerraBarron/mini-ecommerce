@@ -6,6 +6,17 @@ Un sistema de comercio electrónico completo desarrollado con tecnologías moder
 
 Este proyecto implementa una plataforma de e-commerce completa con funcionalidades de autenticación, gestión de productos, carrito de compras y proceso de checkout. La aplicación está construida con una arquitectura de microservicios separando claramente el frontend y backend.
 
+## 🔗 Repositorio Público
+
+**📂 Código Fuente**: [https://github.com/FenandoJovanniGuerraBarron/mini-ecommerce](https://github.com/FenandoJovanniGuerraBarron/mini-ecommerce)
+
+Este repositorio contiene:
+- ✅ **Código fuente completo** del frontend y backend
+- ✅ **Archivo README.md** con documentación detallada
+- ✅ **Configuración de base de datos** y migraciones
+- ✅ **Scripts de instalación** y configuración
+- ✅ **Documentación de API** y funcionalidades
+
 ### 🏗️ Arquitectura
 
 ```
