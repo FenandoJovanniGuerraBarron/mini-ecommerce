@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '../../config';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = config.apiUrl;
 
 export async function register(userData) {
   const response = await axios.post(`${API_BASE_URL}/users`, userData);
