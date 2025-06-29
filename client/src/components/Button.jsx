@@ -1,3 +1,12 @@
+/**
+ * Componente Button - Botón reutilizable
+ * Proporciona un botón con estados de carga, estilos consistentes y accesibilidad
+ * @param {React.ReactNode} children - Contenido del botón
+ * @param {string} type - Tipo de botón (button, submit, reset)
+ * @param {string} className - Clases CSS adicionales
+ * @param {boolean} isLoading - Estado de carga del botón
+ * @param {Object} props - Propiedades adicionales del botón
+ */
 function Button({ children, type = "button", className = "", isLoading, ...props }) {
   return (
     <button
@@ -11,6 +20,7 @@ function Button({ children, type = "button", className = "", isLoading, ...props
       `}
       {...props}
     >
+      {/* Muestra texto de carga o contenido normal */}
       {isLoading ? 'Cargando...' : children}
     </button>
   );

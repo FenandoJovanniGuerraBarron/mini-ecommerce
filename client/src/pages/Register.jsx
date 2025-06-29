@@ -8,8 +8,16 @@ import AuthSwitchLink from '../components/AuthSwitchLink.jsx';
 import AuthTitle from '../components/AuthTitle.jsx';
 import { useEffect } from 'react';
 
+/**
+ * Componente Register - Página de registro de usuarios
+ * Maneja el formulario de registro con validaciones
+ * Utiliza react-hook-form para validación y manejo del formulario
+ */
 function Register() {
+  // Hook para navegación programática
   const navigate = useNavigate();
+  
+  // Configuración de react-hook-form para el formulario
   const {
     register,
     handleSubmit,
@@ -17,31 +25,50 @@ function Register() {
     formState: { errors, isSubmitting }
   } = useForm();
 
+  // Observa el campo de contraseña para validación de confirmación
   const password = watch('password');
 
+  /**
+   * Efecto para actualizar el título de la página
+   * Se ejecuta una vez al montar el componente
+   */
   useEffect(() => {
     document.title = 'Registro | Mini Ecommerce';
   }, []);
 
+  /**
+   * Maneja el envío del formulario de registro
+   * Procesa el registro del usuario y redirige al login
+   * @param {Object} data - Datos del formulario (username, password, confirmPassword)
+   */
   const onSubmit = async (data) => {
     try {
+      // Prepara los datos del usuario para el registro
       const userData = {
         username: data.username,
         password: data.password
       };
       
+      // Llama al servicio de registro
       await registerUser(userData);
+      
+      // Muestra mensaje de éxito y redirige
       alert('Registro exitoso! Redirigiendo al login...');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
+      // Maneja errores de registro
       alert('Error en el registro: ' + error.message);
     }
   };
 
   return (
     <Card>
+      {/* Título de la página */}
       <AuthTitle>Registro</AuthTitle>
+      
+      {/* Formulario de registro */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Campo de username con validación de longitud mínima */}
         <FormField
           label="Username"
           id="username"
@@ -53,6 +80,7 @@ function Register() {
           error={errors.username}
         />
         
+        {/* Campo de contraseña con validación de longitud mínima */}
         <FormField
           label="Contraseña"
           type="password"
@@ -65,6 +93,7 @@ function Register() {
           error={errors.password}
         />
         
+        {/* Campo de confirmación de contraseña */}
         <FormField
           label="Confirmar Contraseña"
           type="password"
@@ -77,16 +106,19 @@ function Register() {
           error={errors.confirmPassword}
         />
         
+        {/* Botón de envío */}
         <Button
           type="submit"
           isLoading={isSubmitting}
         >
           Registrarse
         </Button>
+        
+        {/* Enlace para cambiar a login */}
         <AuthSwitchLink
           question="¿Ya tienes cuenta?"
           linkText="Inicia sesión"
-          to="/login"
+          to="/auth/login"
         />
       </form>
     </Card>

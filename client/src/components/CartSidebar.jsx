@@ -101,9 +101,9 @@ function CartSidebar() {
         )}
         {!loading && cart.length === 0 && <div>El carrito está vacío.</div>}
         {!loading &&
-          cart.map((item) => (
+          cart.map((item, index) => (
             <CartItemCard
-              key={item.id}
+              key={`${item.id}-${index}`}
               item={item}
               onRemove={handleRemove}
               onDecreaseQuantity={handleDecreaseQuantity}
